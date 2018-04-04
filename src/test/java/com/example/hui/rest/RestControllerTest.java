@@ -7,7 +7,7 @@ import cn.hutool.json.JSONObject;
 
 public class RestControllerTest {
 
-	private final static String domain = "http://localhost:8080/people/";
+	private final static String domain = "http://localhost:8888/people/";
 
 	public static void main(String[] args) {
 		getPeoples();
