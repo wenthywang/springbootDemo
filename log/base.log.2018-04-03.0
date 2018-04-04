@@ -1,0 +1,11 @@
+2018-04-03 19:35:35,130 INFO (StartupInfoLogger.java:50)- Starting DemoApplication on lqn-PC with PID 22800 (D:\sts-project\demo\target\classes started by Administrator in D:\sts-project\demo)
+2018-04-03 19:35:35,136 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.0.0.RELEASE, Spring v5.0.4.RELEASE
+2018-04-03 19:35:35,139 INFO (SpringApplication.java:652)- No active profile set, falling back to default profiles: default
+2018-04-03 19:35:38,846 INFO (StartupInfoLogger.java:59)- Started DemoApplication in 4.075 seconds (JVM running for 4.666)
+2018-04-03 19:35:38,850 INFO (DemoApplication.java:43)- SpringBoot Start Success
+2018-04-03 19:38:46,549 INFO (StartupInfoLogger.java:50)- Starting DemoApplication on lqn-PC with PID 24228 (D:\sts-project\demo\target\classes started by Administrator in D:\sts-project\demo)
+2018-04-03 19:38:46,553 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.0.0.RELEASE, Spring v5.0.4.RELEASE
+2018-04-03 19:38:46,555 INFO (SpringApplication.java:652)- No active profile set, falling back to default profiles: default
+2018-04-03 19:38:50,496 INFO (StartupInfoLogger.java:59)- Started DemoApplication in 4.24 seconds (JVM running for 5.343)
+2018-04-03 19:38:50,499 INFO (DemoApplication.java:43)- SpringBoot Start Success
+2018-04-03 19:38:59,115 INFO (SampleController.java:26)- [SampleController.index] invoke success!
