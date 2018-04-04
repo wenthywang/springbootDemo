@@ -10,9 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.alibaba.fastjson.JSONObject;
 import com.example.entity.People;
 import com.example.service.PeopleService;
+
+import cn.hutool.json.JSONUtil;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -23,7 +24,7 @@ public class DemoApplicationTests {
 	@Test
 	public void testGetList() {
 		List<People> plist = peopleService.getPeopleList();
-		System.out.println(JSONObject.toJSONString(plist));
+		System.out.println(JSONUtil.toJsonStr(plist));
 		Assert.assertNotNull(plist);
 	}
 

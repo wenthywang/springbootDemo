@@ -1,4 +1,4 @@
-package com.example.hui.test;
+package com.example.hui.rest;
 
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
@@ -11,9 +11,10 @@ public class RestControllerTest {
 
 	public static void main(String[] args) {
 		getPeoples();
+		// insertPeople();
 		// updatePeople();
-		deletePeople();
-		getPeoples();
+		// deletePeople();
+		// getPeoples();
 	}
 
 	public static void insertPeople() {

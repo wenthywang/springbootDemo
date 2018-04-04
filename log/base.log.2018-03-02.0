@@ -1,5 +1,0 @@
-2018-03-02 16:08:38,229 INFO (StartupInfoLogger.java:48)- Starting DemoApplication on lqn-PC with PID 21176 (D:\sts-project\demo\target\classes started by Administrator in D:\sts-project\demo)
-2018-03-02 16:08:38,232 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.7.RELEASE, Spring v4.3.11.RELEASE
-2018-03-02 16:08:38,233 INFO (SpringApplication.java:593)- No active profile set, falling back to default profiles: default
-2018-03-02 16:08:41,391 INFO (StartupInfoLogger.java:57)- Started DemoApplication in 3.383 seconds (JVM running for 3.77)
-2018-03-02 16:08:41,392 INFO (DemoApplication.java:52)- SpringBoot Start Success
