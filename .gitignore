@@ -48,5 +48,5 @@ nbdist/
 WebRoot/WEB-INF/classes
 bin/
 target/
-
+log/
 .DS_Store
