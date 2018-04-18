@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.entity.People;
+import com.example.entity.Properties;
 import com.example.service.PeopleService;
 
 import cn.hutool.json.JSONUtil;
@@ -20,6 +21,9 @@ import cn.hutool.json.JSONUtil;
 public class DemoApplicationTests {
 	@Autowired
 	private PeopleService peopleService;
+
+	@Autowired
+	private Properties properties;
 
 	@Test
 	public void testGetList() {
@@ -58,5 +62,11 @@ public class DemoApplicationTests {
 		peopleService.deletePeople(id);
 		Assert.assertTrue(true);
 		testGetList();
+	}
+
+	@Test
+	public void testGetProperties() {
+		Assert.assertEquals(properties.getName(), "test");
+		Assert.assertEquals(properties.getTitle(), "i am title");
 	}
 }

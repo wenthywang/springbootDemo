@@ -10,11 +10,10 @@ public class RestControllerTest {
 	private final static String domain = "http://localhost:8888/people/";
 
 	public static void main(String[] args) {
-		// getPeoples();
+		getPeoples();
 		insertPeople();
 		// updatePeople();
 		// deletePeople();
-		// getPeoples();
 	}
 
 	public static void insertPeople() {

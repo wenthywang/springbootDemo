@@ -1,7 +1,5 @@
 package com.example.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +17,8 @@ import com.example.util.DBID;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @EnableAutoConfiguration
 @RestController
@@ -29,84 +29,95 @@ public class UserController {
 
 	protected static Logger logger = LoggerFactory.getLogger(UserController.class);
 
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String postUser(@RequestBody People p) {
-		// 处理"/users/"的POST请求，用来创建User
-		p.setId(DBID.getID());
-		p.setInsertTime(System.currentTimeMillis());
-		JSONObject obj = new JSONObject();
-		obj.put("status", false);
-		obj.put("msg", "添加失败");
-		try {
-			peopleService.insertPeople(p);
-			obj.put("status", true);
-			obj.put("msg", "添加成功");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return obj.toString();
+	@RequestMapping(method = RequestMethod.POST)
+	public Mono<String> postUser(@RequestBody People p) {
+
+		return Mono.create(resp -> {
+			// 处理"/users/"的POST请求，用来创建User
+			p.setId(DBID.getID());
+			p.setInsertTime(System.currentTimeMillis());
+			JSONObject obj = new JSONObject();
+			obj.put("status", false);
+			obj.put("msg", "添加失败");
+			try {
+				peopleService.insertPeople(p);
+				obj.put("status", true);
+				obj.put("msg", "添加成功");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			resp.success(obj.toString());
+		});
+
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public List<People> getPeople() {
+	@RequestMapping(method = RequestMethod.GET)
+	public Flux<People> getPeople() {
 		// 处理"/users/{id}"的GET请求，用来获取url中id值的User信息
 		// url中的id可通过@PathVariable绑定到函数的参数中
-		List<People> pList = peopleService.getPeopleList();
-		for (People people : pList) {
-			Long insertTime = people.getInsertTime();
-			Long updateTime = people.getUpdateTime();
-			if (insertTime != null) {
-				people.setInsertTime_format(DateUtil.format(DateUtil.date(insertTime), "yyyy-MM-dd HH:mm:ss"));
-			}
-			if (updateTime != null) {
-				people.setUpdateTime_format(DateUtil.format(DateUtil.date(updateTime), "yyyy-MM-dd HH:mm:ss"));
-			}
-		}
-		return pList;
+		return Flux.create(resp -> {
+			peopleService.getPeopleList().forEach(people -> {
+				Long insertTime = people.getInsertTime();
+				Long updateTime = people.getUpdateTime();
+				if (insertTime != null) {
+					people.setInsertTime_format(DateUtil.format(DateUtil.date(insertTime), "yyyy-MM-dd HH:mm:ss"));
+				}
+				if (updateTime != null) {
+					people.setUpdateTime_format(DateUtil.format(DateUtil.date(updateTime), "yyyy-MM-dd HH:mm:ss"));
+				}
+				resp.next(people);
+			});
+			resp.complete();
+		});
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public String putUser(@PathVariable String id, @RequestBody People p) {
-		// 处理"/users/{id}"的PUT请求，用来更新User信息
-		People pT = peopleService.getPeopleById(id);
-		pT.setUpdateTime(System.currentTimeMillis());
-		if (p.getAge() != null) {
-			pT.setAge(p.getAge());
-		}
-		if (StrUtil.isNotBlank(p.getName())) {
-			pT.setName(p.getName());
-		}
-		JSONObject obj = new JSONObject();
-		obj.put("status", false);
-		obj.put("msg", "添加失败");
-		try {
-			peopleService.updatePeople(pT);
-			obj.put("status", true);
-			obj.put("msg", "更新成功");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public Mono<String> putUser(@PathVariable String id, @RequestBody People p) {
 
-		return obj.toString();
+		return Mono.create(resp -> {
+			// 处理"/users/{id}"的PUT请求，用来更新User信息
+			People pT = peopleService.getPeopleById(id);
+			pT.setUpdateTime(System.currentTimeMillis());
+			if (p.getAge() != null) {
+				pT.setAge(p.getAge());
+			}
+			if (StrUtil.isNotBlank(p.getName())) {
+				pT.setName(p.getName());
+			}
+			JSONObject obj = new JSONObject();
+			obj.put("status", false);
+			obj.put("msg", "添加失败");
+			try {
+				peopleService.updatePeople(pT);
+				obj.put("status", true);
+				obj.put("msg", "更新成功");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			resp.success(obj.toString());
+		});
+
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public String deleteUser(@PathVariable String id) {
+	public Mono<String> deleteUser(@PathVariable String id) {
 		// 处理"/users/{id}"的DELETE请求，用来删除User
-		JSONObject obj = new JSONObject();
-		obj.put("status", false);
-		obj.put("msg", "删除失败");
-		try {
-			int deleCount = peopleService.deletePeople(id);
-			if (deleCount > 0) {
-				obj.put("status", true);
-				obj.put("msg", "删除成功");
+		return Mono.create(resp -> {
+			JSONObject obj = new JSONObject();
+			obj.put("status", false);
+			obj.put("msg", "删除失败");
+			try {
+				int deleCount = peopleService.deletePeople(id);
+				if (deleCount > 0) {
+					obj.put("status", true);
+					obj.put("msg", "删除成功");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			resp.success(obj.toString());
+		});
 
-		return obj.toString();
 	}
 
 }
