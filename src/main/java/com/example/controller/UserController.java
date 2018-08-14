@@ -77,13 +77,18 @@ public class UserController {
 		return Mono.create(resp -> {
 			// 处理"/users/{id}"的PUT请求，用来更新User信息
 			People pT = peopleService.getPeopleById(id);
-			pT.setUpdateTime(System.currentTimeMillis());
-			if (p.getAge() != null) {
-				pT.setAge(p.getAge());
+			if(pT!=null){
+				pT.setUpdateTime(System.currentTimeMillis());
+				if (p.getAge() != null) {
+					pT.setAge(p.getAge());
+				}
+				if (StrUtil.isNotBlank(p.getName())) {
+					pT.setName(p.getName());
+				}
+			}else{
+				System.out.print("user not found->"+id);
 			}
-			if (StrUtil.isNotBlank(p.getName())) {
-				pT.setName(p.getName());
-			}
+
 			JSONObject obj = new JSONObject();
 			obj.put("status", false);
 			obj.put("msg", "添加失败");

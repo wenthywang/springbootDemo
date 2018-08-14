@@ -1,18 +1,20 @@
 package com.example.mapper;
 
+import com.example.entity.People;
+import org.beetl.sql.core.mapper.BaseMapper;
+
 import java.util.List;
 
-import com.example.entity.People;
+//@SqlResource("people")
+public interface PeopleMapper  extends BaseMapper<People> {
 
-public interface PeopleMapper {
-
-	public List<People> getPeopleList();
-
-	public int insertPeople(People people);
-
-	public int updatePeople(People people);
-
-	public int deletePeople(String id);
-
-	public People getPeopleById(String id);
+//	 List<People> all();
+//
+//	 void insert(People people);
+//
+//	 int updateById(People people);
+//
+//	 int deleteById(String id);
+//
+//	 People unique(String id);
 }

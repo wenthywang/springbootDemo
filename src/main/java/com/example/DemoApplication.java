@@ -1,13 +1,12 @@
 package com.example;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.example.mapper")
+//@MapperScan("com.example.mapper")
 public class DemoApplication {
 	protected static Logger logger = LoggerFactory.getLogger(DemoApplication.class);
 

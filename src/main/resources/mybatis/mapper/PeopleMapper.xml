@@ -15,6 +15,7 @@
         SELECT   
            *
         FROM people
+        LIMIT 10
     </select>  
     
     <select id="getPeopleById"   resultMap="people">  

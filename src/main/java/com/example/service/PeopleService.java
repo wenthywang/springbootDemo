@@ -14,23 +14,27 @@ public class PeopleService {
 	private PeopleMapper peopleMapper;
 
 	public int insertPeople(People people) {
-		return peopleMapper.insertPeople(people);
+
+		return 	peopleMapper.getSQLManager().insert(people);
 	}
 
-	public List<People> getPeopleList() {
-		return peopleMapper.getPeopleList();
+	public List<People> getPeopleList()
+
+	{
+		return peopleMapper.getSQLManager().all(People.class);
 	}
 
 	public int updatePeople(People people) {
-		return peopleMapper.updatePeople(people);
+
+		return  	peopleMapper.getSQLManager().updateById(people);
 	}
 
 	public int deletePeople(String id) {
-		return peopleMapper.deletePeople(id);
+		return peopleMapper.getSQLManager().deleteById(People.class,id);
 	}
 
 	public People getPeopleById(String id) {
-		return peopleMapper.getPeopleById(id);
+		return peopleMapper.getSQLManager().unique(People.class,id);
 	}
 
 }
