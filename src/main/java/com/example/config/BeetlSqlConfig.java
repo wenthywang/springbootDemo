@@ -56,8 +56,8 @@ public class BeetlSqlConfig {
     @Bean(name = "beetlSqlScannerConfigurer")
     public BeetlSqlScannerConfigurer getBeetlSqlScannerConfigurer() {
         BeetlSqlScannerConfigurer conf = new BeetlSqlScannerConfigurer();
-        conf.setBasePackage("com.example.mapper");
-        conf.setDaoSuffix("Mapper");
+        conf.setBasePackage("com.example.dao");
+        conf.setDaoSuffix("Dao");
         conf.setSqlManagerFactoryBeanName("sqlManagerFactoryBean");
         return conf;
     }
@@ -73,7 +73,7 @@ public class BeetlSqlConfig {
         factory.setDbStyle(new MySqlStyle());
         factory.setInterceptors(new Interceptor[]{new DebugInterceptor()});
         factory.setNc(new UnderlinedNameConversion());//开启驼峰
-        factory.setSqlLoader(new ClasspathLoader("/beetl-sql"));//sql文件路径
+        factory.setSqlLoader(new ClasspathLoader("/sql"));//sql文件路径
         return factory;
     }
 
@@ -81,8 +81,11 @@ public class BeetlSqlConfig {
     //配置数据库
     @Bean(name = "datasource")
     public DataSource getDataSource(Environment env) {
-        return DataSourceBuilder.create().url(env.getProperty("spring.datasource.url")).username(env.getProperty("spring.datasource.username")).
-                password(env.getProperty("spring.datasource.password")).build();
+        return DataSourceBuilder.create()
+                .url(env.getProperty("spring.datasource.url"))
+                .username(env.getProperty("spring.datasource.username"))
+                .password(env.getProperty("spring.datasource.password"))
+                .build();
     }
 
     //开启事务

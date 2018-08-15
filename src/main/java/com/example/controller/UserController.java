@@ -125,4 +125,26 @@ public class UserController {
 
 	}
 
+
+
+	@RequestMapping(value = "/{age}",method = RequestMethod.GET)
+	public Flux<People> getPeopleByAge(@PathVariable int age) {
+		// 处理"/users/{id}"的GET请求，用来获取url中id值的User信息
+		// url中的id可通过@PathVariable绑定到函数的参数中
+		return Flux.create(resp -> {
+			peopleService.getPeopleListByAge(age).forEach(people -> {
+				Long insertTime = people.getInsertTime();
+				Long updateTime = people.getUpdateTime();
+				if (insertTime != null) {
+					people.setInsertTime_format(DateUtil.format(DateUtil.date(insertTime), "yyyy-MM-dd HH:mm:ss"));
+				}
+				if (updateTime != null) {
+					people.setUpdateTime_format(DateUtil.format(DateUtil.date(updateTime), "yyyy-MM-dd HH:mm:ss"));
+				}
+				resp.next(people);
+			});
+			resp.complete();
+		});
+	}
+
 }

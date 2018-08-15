@@ -1,6 +1,7 @@
 package com.example.entity;
 
 import lombok.Data;
+import org.beetl.sql.core.annotatoin.AssignID;
 
 import java.io.Serializable;
 
@@ -14,6 +15,7 @@ public class People implements Serializable {
 	/**
 	 * id主键
 	 */
+	@AssignID
 	private String id;
 	/**
 	 * 名字

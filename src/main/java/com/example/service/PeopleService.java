@@ -1,40 +1,42 @@
 package com.example.service;
 
-import java.util.List;
-
+import com.example.dao.PeopleDao;
+import com.example.entity.People;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.entity.People;
-import com.example.mapper.PeopleMapper;
+import java.util.List;
 
 @Service
 public class PeopleService {
-	@Autowired
-	private PeopleMapper peopleMapper;
+    @Autowired
+    private PeopleDao peopleDao;
 
-	public int insertPeople(People people) {
+    public int insertPeople(People people) {
+        return peopleDao.getSQLManager().insert(people);
+    }
 
-		return 	peopleMapper.getSQLManager().insert(people);
-	}
+    public List<People> getPeopleList()
 
-	public List<People> getPeopleList()
+    {
+        return peopleDao.getSQLManager().all(People.class);
+    }
 
-	{
-		return peopleMapper.getSQLManager().all(People.class);
-	}
+    public int updatePeople(People people) {
 
-	public int updatePeople(People people) {
+        return peopleDao.getSQLManager().updateById(people);
+    }
 
-		return  	peopleMapper.getSQLManager().updateById(people);
-	}
+    public int deletePeople(String id) {
+        return peopleDao.getSQLManager().deleteById(People.class, id);
+    }
 
-	public int deletePeople(String id) {
-		return peopleMapper.getSQLManager().deleteById(People.class,id);
-	}
+    public People getPeopleById(String id) {
+        return peopleDao.getSQLManager().unique(People.class, id);
+    }
 
-	public People getPeopleById(String id) {
-		return peopleMapper.getSQLManager().unique(People.class,id);
-	}
-
+    public List<People> getPeopleListByAge(int age)
+    {
+        return peopleDao.selectByAge(age);
+    }
 }
