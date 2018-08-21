@@ -21,6 +21,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<docker.image.prefix>wenthywang</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -111,8 +112,38 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>1.0.0</version>
+				<executions>
+					<execution>
+						<id>build-image</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<imageName>wenthywang/docker_springboot</imageName>
+				<!--	<imageName>${docker.image.prefix}/${project.artifactId}</imageName>-->
+					<dockerDirectory>${basedir}/src/main/docker</dockerDirectory>
+					<forceTags>true</forceTags>
 
+					<resources>
+						<resource>
+						<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+
+				<serverId>docker-hub</serverId>
+				<registryUrl>https://index.docker.io/v1/</registryUrl>
+					<dockerHost>http://111.230.24.31:2375</dockerHost>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>
