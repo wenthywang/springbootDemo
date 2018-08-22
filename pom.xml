@@ -141,7 +141,6 @@
 
 				<serverId>docker-hub</serverId>
 				<registryUrl>https://index.docker.io/v1/</registryUrl>
-					<dockerHost>http://111.230.24.31:2375</dockerHost>
 				</configuration>
 			</plugin>
 		</plugins>
