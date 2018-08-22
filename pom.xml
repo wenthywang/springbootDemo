@@ -142,7 +142,6 @@
 				<configuration>
 					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
 					<dockerDirectory>target/docker</dockerDirectory>
-					<pushImage>true</pushImage>
 					<resources>
 						<resource>
 						<targetPath>/</targetPath>
