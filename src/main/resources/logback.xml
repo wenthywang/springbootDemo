@@ -6,23 +6,24 @@
             <charset>UTF-8</charset> 
         </encoder>  
     </appender>  
-    <appender name="baselog"  
-        class="ch.qos.logback.core.rolling.RollingFileAppender">  
-        <File>/log/base.log</File>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
-            <fileNamePattern>/log/base.log.%d.%i</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy  class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">  
-        		<!-- or whenever the file size reaches 64 MB -->  
-        		<maxFileSize>64 MB</maxFileSize>
-      		</timeBasedFileNamingAndTriggeringPolicy>
-        </rollingPolicy>
-        <encoder>  
-            <pattern>  
-                %d %p (%file:%line\)- %m%n
-            </pattern>  
-            <charset>UTF-8</charset> <!-- 此处设置字符集 --> 
-        </encoder>  
-    </appender>
+    <appender name="baselog"
+                         class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <File>/log/base.log</File>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <fileNamePattern>/log/base.log.%d.%i</fileNamePattern>
+        <timeBasedFileNamingAndTriggeringPolicy  class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+            <!-- or whenever the file size reaches 64 MB -->
+            <maxFileSize>64 MB</maxFileSize>
+        </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+    <encoder>
+        <pattern>
+            %d %p (%file:%line\)- %m%n
+        </pattern>
+        <charset>UTF-8</charset> <!-- 此处设置字符集 -->
+    </encoder>
+</appender>
+
 
     <appender name="errorlog"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -41,14 +42,14 @@
             <charset>UTF-8</charset> <!-- 此处设置字符集 -->
         </encoder>
     </appender>
-    <root level="info">  
+    <root level="INFO">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="baselog" />
     </root>
-    <!--<logger name="com.example" level="INFO">
-        <appender-ref ref="baselog" />  
-    </logger>-->
-    <logger name="com.example" level="ERROR">
+    <!--<logger name="com.example" level="ERROR">
         <appender-ref ref="errorlog" />
-    </logger>
+    </logger>-->
+    <!--<root  level="error">
+        <appender-ref ref="errorlog" />
+    </root>-->
 </configuration>

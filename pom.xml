@@ -106,8 +106,22 @@
 
 	</dependencies>
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/docker</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/Dockerfile</include>
+				</includes>
+				<targetPath>../docker</targetPath>
+			</resource>
+
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+
 		<plugins>
-		
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -126,10 +140,12 @@
 					</execution>
 				</executions>
 				<configuration>
-					<imageName>wenthywang/docker_springboot</imageName>
-				<!--	<imageName>${docker.image.prefix}/${project.artifactId}</imageName>-->
-					<dockerDirectory>${basedir}/src/main/docker</dockerDirectory>
+					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+					<dockerDirectory>target/docker</dockerDirectory>
+
 					<forceTags>true</forceTags>
+					<rm>true</rm>
+					<pushImage>true</pushImage>
 
 					<resources>
 						<resource>
