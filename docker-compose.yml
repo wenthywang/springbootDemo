@@ -4,7 +4,7 @@ services:
   springboot_docker_demo:
         image: "wenthywang/docker_springboot"
         ports:
-                - "8088:8088"
+                - "8082:8082"
         environment:
           JAVA_OPTS: -Xmx256m -Xms256m
         volumes:
