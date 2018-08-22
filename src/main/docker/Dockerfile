@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk-alpine
 MAINTAINER wenthywang
-VOLUME /tmp
+VOLUME /urs/local/wwh/tmp
 ADD @project.build.finalName@.jar @project.build.finalName@.jar
 RUN sh -c 'touch /@project.build.finalName@.jar'
 ENV TZ=Asia/Shanghai
