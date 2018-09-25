@@ -11,6 +11,12 @@ spring:
     tomcat.max-active: 10
     tomcat.min-idle: 1
     tomcat.max-idle: 5
+  thymeleaf:
+    prefix: classpath:/templates/
+    encoding: UTF-8
+    suffix: .html
+    cache: false
+
 ---
 spring:
   profiles: dev

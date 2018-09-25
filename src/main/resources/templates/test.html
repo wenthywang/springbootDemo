@@ -27,19 +27,17 @@
 	 $.ajax({
 	        type:"POST",
 	        url:"/people/",
-	     //   contentType: "application/json", //必须这样写
-	   //     dataType:"json",
-	     //   data:JSON.stringify(param),//schoolList是你要提交是json字符串
-	        data:param,//schoolList是你要提交是json字符串
+	        contentType: "application/json", //必须这样写
+	        data:JSON.stringify(param),//schoolList是你要提交是json字符串
 	        success:function (data) {
 	        	 if(data){
-	        		 if(data.status){
+                   var result=  JSON.parse(data);
+	        		 if(result.status){
 	        			 alert("success");
 	        		 }else{
 	        			 alert("fail");
 	        		 }
-	        		 
-	        	
+
 	        	 }else{
 	        		 alert("fail");
 	        	 }
