@@ -14,8 +14,9 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.4.RELEASE</version>
+		<version>2.4.0</version>
 	</parent>
+	<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -150,8 +151,8 @@
 						</resource>
 					</resources>
 
-				<serverId>docker-hub</serverId>
-				<registryUrl>https://index.docker.io/v1/</registryUrl>
+<!--				<serverId>docker-hub</serverId>-->
+<!--				<registryUrl>https://index.docker.io/v1/</registryUrl>-->
 				</configuration>
 			</plugin>
 		</plugins>

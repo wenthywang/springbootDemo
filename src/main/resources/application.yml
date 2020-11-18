@@ -5,7 +5,7 @@ spring:
       active: dev
   datasource:
     url: jdbc:mysql://111.230.24.31:33060/test?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
-    username: wenthywang
+    username: root
     password: wwh13660783361
     driver-class-name: com.mysql.jdbc.Driver
     tomcat.max-active: 10
@@ -13,13 +13,17 @@ spring:
     tomcat.max-idle: 5
 ---
 spring:
-  profiles: dev
+  config:
+    activate:
+      on-profile: dev
 server:
-    port: 8081
+    port: 8082
 
 ---
 spring:
-  profiles: docker
+  config:
+    activate:
+      on-profile: docker
 server:
   port: 8082
 

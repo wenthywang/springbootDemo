@@ -1,22 +1,16 @@
 package com.example.hui;
 
+import cn.hutool.json.JSONUtil;
+import com.example.entity.People;
+import com.example.service.PeopleService;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
 import java.util.List;
 import java.util.UUID;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import com.example.entity.People;
-import com.example.service.PeopleService;
-
-import cn.hutool.json.JSONUtil;
-
-
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class DemoApplicationTests {
 	@Autowired
@@ -27,7 +21,6 @@ public class DemoApplicationTests {
 	public void testGetList() {
 		List<People> plist = peopleService.getPeopleList();
 		System.out.println(JSONUtil.toJsonStr(plist));
-		Assert.assertNotNull(plist);
 	}
 
 	@Test
@@ -39,7 +32,6 @@ public class DemoApplicationTests {
 		p.setInsertTime(System.currentTimeMillis());
 		p.setUpdateTime(System.currentTimeMillis());
 		peopleService.insertPeople(p);
-		Assert.assertTrue(true);
 	}
 
 	@Test
@@ -50,7 +42,6 @@ public class DemoApplicationTests {
 		p.setName("api test update");
 		p.setUpdateTime(System.currentTimeMillis());
 		peopleService.updatePeople(p);
-		Assert.assertTrue(true);
 		testGetList();
 	}
 
@@ -58,7 +49,6 @@ public class DemoApplicationTests {
 	public void testDelete() {
 		String id = "c388b9ba-049c-4ebd-b751-a113a83e3007";
 		peopleService.deletePeople(id);
-		Assert.assertTrue(true);
 		testGetList();
 	}
 
